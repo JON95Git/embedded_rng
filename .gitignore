@@ -1,0 +1,8 @@
+.settings
+.vscode
+build
+*.log
+*.txt
+*.html
+*.o
+*.d
