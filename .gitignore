@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 .settings
 .vscode
-build
+build*
 *.log
 *.txt
 *.html
