@@ -9,5 +9,6 @@
 #include "../components/gui_widgets.h"
 
 void gui_create_mass_storage_tab(lv_obj_t *parent);
+void gui_close(void);
 
 #endif /* __GUI_MASS_STORAGE_TAB_H */
