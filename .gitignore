@@ -58,3 +58,4 @@ build*
 *.html
 *.o
 *.d
+dummy_fs
