@@ -12,7 +12,6 @@
 
 void app_create_threads(void);
 void lvgl_task(void const *argument);
-void analog_task(void const *argument);
-void pid_task(void const *argument); 
+void put_queue_rng_thread(void *data, uint8_t id);
 
 #endif /* __APP_TASKS_H */
