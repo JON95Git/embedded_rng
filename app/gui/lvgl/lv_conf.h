@@ -87,7 +87,7 @@ typedef int16_t lv_coord_t;
 #define LV_MEM_CUSTOM      0
 #if LV_MEM_CUSTOM == 0
 /* Size of the memory used by `lv_mem_alloc` in bytes (>= 2kB)*/
-#  define LV_MEM_SIZE    (32U * 1024U)
+#  define LV_MEM_SIZE    (64U * 1024U)
 
 /* Complier prefix for a big array declaration */
 #  define LV_MEM_ATTR
@@ -99,9 +99,9 @@ typedef int16_t lv_coord_t;
 /* Automatically defrag. on free. Defrag. means joining the adjacent free cells. */
 #  define LV_MEM_AUTO_DEFRAG  1
 #else       /*LV_MEM_CUSTOM*/
-#  define LV_MEM_CUSTOM_INCLUDE <stdlib.h>   /*Header for the dynamic memory function*/
-#  define LV_MEM_CUSTOM_ALLOC   malloc       /*Wrapper to malloc*/
-#  define LV_MEM_CUSTOM_FREE    free         /*Wrapper to free*/
+#  define LV_MEM_CUSTOM_INCLUDE "portable/portable.h"   /*Header for the dynamic memory function*/
+#  define LV_MEM_CUSTOM_ALLOC   MALLOC       /*Wrapper to malloc*/
+#  define LV_MEM_CUSTOM_FREE    FREE         /*Wrapper to free*/
 #endif     /*LV_MEM_CUSTOM*/
 
 /* Garbage Collector settings
