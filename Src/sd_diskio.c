@@ -76,7 +76,9 @@ See BSP_SD_ErrorCallback() and BSP_SD_AbortCallback() below
  * Notice: This is applicable only for cortex M7 based platform.
  */
 /* USER CODE BEGIN enableSDDmaCacheMaintenance */
+#ifdef ENABLE_CACHE
 #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1
+#endif
 /* USER CODE END enableSDDmaCacheMaintenance */
 
 /*

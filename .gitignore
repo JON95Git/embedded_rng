@@ -52,9 +52,10 @@ Mkfile.old
 dkms.conf
 .settings
 .vscode
-build
+build*
 *.log
 *.txt
 *.html
 *.o
 *.d
+dummy_fs
