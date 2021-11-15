@@ -28,9 +28,15 @@
 #define FS_DIR_OPEN(x, y) f_opendir(x, y)
 #define FS_DIR_CLOSE(x) f_closedir(x)
 #define FS_DIR_READ(x,y) f_readdir(x, y)
+#define FS_PATH ""
+
+#define DELAY(x) osDelay(x)
+#define MALLOC(x) pvPortMalloc(x)
+#define FREE(x) vPortFree(x)
 
 #else
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
@@ -58,8 +64,14 @@
 #define FS_DIR_OPEN(x, y) fdopendir(x)
 #define FS_DIR_CLOSE(x) fdclosedir(x)
 #define FS_DIR_READ(x,y) readdir(x)
+#define FS_PATH "dummy_fs/"
 
+#define DELAY(x) usleep(x * 1000)
+#define MALLOC(x) malloc(x)
+#define FREE(x) free(x)
 #endif
+
+#define MAX_FILE_NAME 50
 
 typedef enum {
 	FS_SUCCESS = 0,
@@ -85,7 +97,8 @@ typedef enum {
 	_FS_ERR_ENUM_END = 0xFFFFFFFF
 } fs_err_t;
 
-uint8_t _get_rng(uint8_t *rng);
+void _init_rng(void);
+uint8_t _get_rng(uint8_t *rng, uint16_t rng_len);
 fs_err_t _sd_fs_create_file(const char *name, FS_FILE_T **file_oject);
 fs_err_t _sd_fs_delete_file(const char *name);
 fs_err_t _sd_fs_open_file(const char *name, FS_FILE_T **file_oject);
@@ -97,5 +110,6 @@ fs_err_t _sd_fs_close_file(FS_FILE_T *file_oject);
 fs_err_t _sd_fs_flush(FS_FILE_T *file_oject);
 fs_err_t _sd_fs_move_file_pointer(FS_FILE_T *file_oject, uint32_t offset);
 void _sd_fs_reset_file_pointer(FS_FILE_T *file_oject);
+uint64_t _sd_fs_get_file_size(FS_FILE_T *file_oject);
 
 #endif /* __PORTABLE_H */
