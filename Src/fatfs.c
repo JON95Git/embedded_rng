@@ -31,7 +31,7 @@ FRESULT ret = FR_OK;
 uint32_t byteswritten, bytesread;                     /* File write/read counts */
 uint8_t wtext[] = "This is STM32 working with FatFs\n\r"; /* File write buffer */
 uint8_t rtext[100];
-uint8_t workBuffer[2*_MAX_SS];
+uint8_t workBuffer[16 * _MAX_SS];
 /* USER CODE END Variables */
 
 void MX_FATFS_Init(void)
@@ -138,7 +138,8 @@ void create_file_example(void)
     printf("[FAT]: ERROR: %s\n\r", string_err);
     return;
   }
-  
+
+#ifdef FORMAT_FS
   printf("[FAT]: Formating file system\n\r");
   ret = f_mkfs(SDPath, FM_ANY, 0, workBuffer, sizeof(workBuffer));
   if (ret != FR_OK) {
@@ -146,6 +147,7 @@ void create_file_example(void)
     printf("[FAT]: ERROR: %s\n\r", string_err);
     return;
   }
+#endif
 
   printf("[FAT]: Creating file\n\r");
   ret = f_open(&SDFile, "jon.txt", FA_CREATE_ALWAYS | FA_WRITE);
@@ -156,7 +158,6 @@ void create_file_example(void)
   }
 
   printf("[FAT]: Wrinting file\n\r");
-//   ret = f_write(&SDFile, wtext, sizeof(wtext), (void *)&byteswritten);
   byteswritten = f_puts(wtext, &SDFile);
   if((byteswritten == 0) || (ret != FR_OK)){
     translate_fatfs_error_code_to_string(ret, string_err);
@@ -167,8 +168,6 @@ void create_file_example(void)
   printf("[FAT]: Closing file\n\r");
   f_close(&SDFile);
 
-  /*##-11- Unlink the micro SD disk I/O driver ###############################*/
-  FATFS_UnLinkDriver(SDPath);
 }
 /* USER CODE END Application */
 
