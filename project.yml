@@ -44,11 +44,14 @@
     - +:test/**
     - -:test/support
   :source:
-    - Src
-    - Inc
+    # - Src
+    # - Inc
     # - Drivers/**
     # - Middlewares/**
-    - app/**
+    # - app/**
+    - app/portable/**
+    - app/rng_user/**
+    - app
   :support:
     - test/support
   :libraries: []
@@ -112,8 +115,10 @@
   :load_paths:
     - "#{Ceedling.load_path}"
   :enabled:
+    # - colour_report
     - stdout_pretty_tests_report
     - module_generator
     - xml_tests_report
-    - gcov
+    - command_hooks
+    - gcov #pip3 install gcovr #ceedling gcov:all utils:gcov
 ...

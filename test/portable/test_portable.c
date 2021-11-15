@@ -90,4 +90,31 @@ void test_read_file(void)
     TEST_ASSERT_EQUAL(FS_SUCCESS, ret);
 }
 
+void test_get_file_size(void)
+{
+    fs_err_t ret = FS_SUCCESS;
+    FS_FILE_T *file_object = NULL;
+    uint64_t file_size_in_bytes;
+
+    ret = _sd_fs_open_file(FILE_NAME, &file_object);
+    TEST_ASSERT_EQUAL(FS_SUCCESS, ret);
+    TEST_ASSERT_NOT_EQUAL(NULL, file_object);
+
+    file_size_in_bytes = _sd_fs_get_file_size(file_object);
+    TEST_ASSERT_EQUAL(sizeof(FILE_CONTENT) - 1, file_size_in_bytes);
+}
+
+void test_delete_file(void)
+{
+    fs_err_t ret = FS_SUCCESS;
+    FS_FILE_T *file_object = NULL;
+
+    ret = _sd_fs_delete_file(FILE_NAME);
+    TEST_ASSERT_EQUAL(FS_SUCCESS, ret);
+
+    ret = _sd_fs_open_file(FILE_NAME, &file_object);
+    TEST_ASSERT_NOT_EQUAL(FS_SUCCESS, ret);
+    TEST_ASSERT_EQUAL(NULL, file_object);
+}
+
 #endif // TEST
