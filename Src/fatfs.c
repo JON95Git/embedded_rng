@@ -158,7 +158,7 @@ void create_file_example(void)
   }
 
   printf("[FAT]: Wrinting file\n\r");
-  byteswritten = f_puts(wtext, &SDFile);
+  byteswritten = f_puts((const char *)wtext, &SDFile);
   if((byteswritten == 0) || (ret != FR_OK)){
     translate_fatfs_error_code_to_string(ret, string_err);
     printf("[FAT]: ERROR: %s\n\r", string_err);

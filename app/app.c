@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "app.h"
 #include "rng_user/rng_user.h"
 

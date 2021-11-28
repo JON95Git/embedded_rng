@@ -116,9 +116,13 @@
     - "#{Ceedling.load_path}"
   :enabled:
     # - colour_report
-    - stdout_pretty_tests_report
+    # - stdout_pretty_tests_report
     - module_generator
     - xml_tests_report
     - command_hooks
     - gcov #pip3 install gcovr #ceedling gcov:all utils:gcov
+    - stdout_gtestlike_tests_report
+
+# :gcov:
+#   :html_report_type:  detailed
 ...

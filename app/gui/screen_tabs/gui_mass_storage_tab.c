@@ -150,8 +150,8 @@ static void ta_event_cb(lv_obj_t *ta, lv_event_t event)
 
 static void _gui_create_labels(lv_obj_t *parent)
 {
-    _gui_create_param_label(parent, "Name: ", -150, -70, &name_label);
-    _gui_create_param_label(parent, "Size: ", -160, -20, &size_label);
+    _gui_create_param_label(parent, "Name: ", -170, -70, &name_label);
+    _gui_create_param_label(parent, "Size (MB): ", -160, -20, &size_label);
 }
 
 static void _gui_config_save_button(void)
